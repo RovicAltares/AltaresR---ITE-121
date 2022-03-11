@@ -1,0 +1,165 @@
+using System;
+using System.Linq;
+using System.Collections.Generic;
+
+namespace Rovic Altares.
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            bool dum = true;
+            int[] numArray = new int[1];
+            int first = 0;
+            Console.WriteLine("Enter number in array");
+            do
+            {
+                try
+                {
+                    Console.Write("enter number: "); 
+                    string input = Console.ReadLine();
+                    int n = int.Parse(input);
+                    int[] newArray = new int[numArray.Length + 1];
+                    
+                    int i;
+                        for (i = 0; i < numArray.Length; i++)
+                        {
+                            newArray[i] = numArray[i];
+                        }
+                        newArray[i-1] = n;
+                        numArray = newArray;
+                }
+                catch (Exception e)
+                {
+                    dum = false;
+                }
+            } while (dum );
+            int[] tempArray = new int[numArray.Length - 1];
+          
+            for(int i = 0; i < tempArray.Length; i++)
+            {
+                tempArray[i] = numArray[i];
+            }
+
+            Console.WriteLine(" Input 1 for function 1 
+ Input 2 for function 2 
+ Input 3 for function 3 
+ Input 4 for function 4 
+ Input 5 for function 5");
+
+            Console.Write("Input: ");
+            string choice = Console.ReadLine();
+            Console.WriteLine(" ");
+            Console.WriteLine(" ");
+            Console.WriteLine(" ");
+
+
+            if (choice == "1")
+            {
+                Console.WriteLine("Enter index to be removed: ");
+                string index = Console.ReadLine(); 
+                Function1(tempArray, int.Parse(index));
+            }
+            else if(choice == "2")
+            {
+                Function2(tempArray);
+            }
+            else if (choice == "3")
+            {
+                Function3(tempArray); ;
+            }
+            else if (choice == "4")
+            {
+                Function4(tempArray);
+            }
+            else if (choice == "5")
+            {
+                Function5(tempArray);
+            }
+
+        }
+
+        private static void Function1(int[] arr, int pos)
+        {
+
+            List<int> nums = new List<int>(arr);
+            nums.RemoveAt(pos);
+             arr = nums.ToArray();
+            Console.Write($"Function 1: deleted at position {pos}  :  ");
+            PrintArray(arr);
+        }
+
+        private static void Function2(int[] arr)
+        {
+            Console.WriteLine("Function 2: the frequency of each element are: ");
+            for (int i = 0; i < arr.Length; i++)
+            {
+                var cnt = arr.Count(e => e == arr[i]);
+                Console.WriteLine($"Element {arr[i]}, count {cnt}");
+            }
+        } 
+
+        private static void Function3(int[] arr)
+        {
+            Console.Write("Function 3: All unique elements in array ");
+            for (int i = 0; i < arr.Length; i++)
+            {
+                bool isDuplicate = false;
+                for (int j = 0; j < arr.Length ; j++)
+                {
+                    if (i != j && arr[i] == arr[j])
+                    {
+                        isDuplicate = true;
+                        break;
+                    }
+                }
+
+                if (!isDuplicate)
+                {
+                    Console.Write(arr[i]+" , ");
+
+                }
+            }
+            Console.WriteLine(" ");
+        }
+
+        private static void Function4(int[] arr)
+        {
+            List<int> nums = new List<int>();
+
+            int sameCount = 0;
+            for(int i = 0, n = 0; i < arr.Length; i++)
+            {
+               for(int x =0; x< arr.Length; x++)
+                {
+                    if(i != x && arr[i] == arr[x] && !nums.Contains(arr[i]))
+                    {
+                        sameCount += 1;
+                        nums.Add(arr[i]);
+                        break;
+                    }
+                }
+            }
+
+            Console.WriteLine("Function 4: The total number of duplicates is " + sameCount);
+        }
+
+        private static void Function5(int[] arr)
+        {
+            int[] dist = arr.Distinct().ToArray();
+            Console.Write("Function 5: Duplicates are deleted: ");
+            PrintArray(dist);
+        }
+
+        private static void PrintArray(int[] arr)
+        {
+            for (int x = 0; x < arr.Length; x++)
+            {
+                Console.Write(arr[x] + " , ");
+            }
+            Console.WriteLine(" ");
+        }
+    }
+}
+
+// code created by  Altares, Rovic
